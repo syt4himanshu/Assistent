@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer's Weather Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header-image">
+            <img src="farm.jpg" alt="Farm field with crops">
+        </div>
+        
+        <h1>Farmer's Weather Assistant</h1>
+        
+        <div class="input-section">
+            <div class="input-group">
+                <label for="crop-type">Crop Type</label>
+                <select id="crop-type">
+                    <option value="wheat">Wheat</option>
+                    <option value="rice">Rice</option>
+                    <option value="corn">Corn</option>
+                    <option value="soybeans">Soybeans</option>
+                    <option value="cotton">Cotton</option>
+                    <option value="vegetables">Vegetables</option>
+                    <option value="fruits">Fruits</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="crop-stage">Crop Growth Stage</label>
+                <select id="crop-stage">
+                    <option value="planting">Planting/Sowing</option>
+                    <option value="germination">Germination</option>
+                    <option value="vegetative">Vegetative Growth</option>
+                    <option value="reproductive">Reproductive Stage</option>
+                    <option value="maturity">Maturity</option>
+                    <option value="harvest">Pre-Harvest</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="location-input">Location</label>
+                <div class="search-box">
+                    <input type="text" id="location-input" placeholder="Enter your village or city...">
+                    <button id="search-btn">Get Weather</button>
+                </div>
+                <div class="suggestions" id="suggestions"></div>
+            </div>
+        </div>
+        
+        <div class="loading" id="loading">
+            <div class="loading-spinner"></div>
+            <p>Getting weather data for your crops...</p>
+        </div>
+        
+        <div class="error-message" id="error-message"></div>
+        
+        <div class="weather-info" id="weather-info">
+            <div class="main-info">
+                <div class="weather-icon" id="weather-icon">
+                    <!-- Weather icon will be inserted here -->
+                </div>
+                <div class="temperature" id="temperature"></div>
+                <div class="description" id="description"></div>
+                <div class="location" id="location"></div>
+            </div>
+            
+            <div class="details">
+                <div class="col">
+                    <div class="icon"><i class="feels-like-icon"></i></div>
+                    <p>Feels Like</p>
+                    <p class="value" id="feels-like"></p>
+                </div>
+                <div class="col">
+                    <div class="icon"><i class="humidity-icon"></i></div>
+                    <p>Humidity</p>
+                    <p class="value" id="humidity"></p>
+                </div>
+                <div class="col">
+                    <div class="icon"><i class="wind-icon"></i></div>
+                    <p>Wind</p>
+                    <p class="value" id="wind-speed"></p>
+                </div>
+            </div>
+            
+            <div class="farming-advice" id="farming-advice">
+                <h3>Farming Recommendations</h3>
+                <div class="advice-content" id="advice-content">
+                    <!-- Farming recommendations will be inserted here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- New extended dashboard section for big screens -->
+        <div class="extended-dashboard" id="extended-dashboard">
+            <div class="dashboard-card">
+                <h3 class="dashboard-title">7-Day Forecast</h3>
+                <div class="forecast-days" id="forecast-days">
+                    <!-- Forecast days will be inserted here -->
+                    <div class="forecast-day">
+                        <div class="forecast-date">Today</div>
+                        <div class="forecast-icon">☀️</div>
+                        <div class="forecast-temp">32°C</div>
+                    </div>
+                    <div class="forecast-day">
+                        <div class="forecast-date">Wed</div>
+                        <div class="forecast-icon">⛅</div>
+                        <div class="forecast-temp">30°C</div>
+                    </div>
+                    <div class="forecast-day">
+                        <div class="forecast-date">Thu</div>
+                        <div class="forecast-icon">🌧️</div>
+                        <div class="forecast-temp">28°C</div>
+                    </div>
+                    <div class="forecast-day">
+                        <div class="forecast-date">Fri</div>
+                        <div class="forecast-icon">🌧️</div>
+                        <div class="forecast-temp">27°C</div>
+                    </div>
+                    <div class="forecast-day">
+                        <div class="forecast-date">Sat</div>
+                        <div class="forecast-icon">⛅</div>
+                        <div class="forecast-temp">29°C</div>
+                    </div>
+                    <div class="forecast-day">
+                        <div class="forecast-date">Sun</div>
+                        <div class="forecast-icon">☀️</div>
+                        <div class="forecast-temp">31°C</div>
+                    </div>
+                    <div class="forecast-day">
+                        <div class="forecast-date">Mon</div>
+                        <div class="forecast-icon">☀️</div>
+                        <div class="forecast-temp">32°C</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-card">
+                <h3 class="dashboard-title">Soil Conditions</h3>
+                <div class="soil-info">
+                    <div class="soil-condition">
+                        <p><strong>Soil Moisture:</strong> <span id="soil-moisture">65%</span></p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 65%;"></div>
+                        </div>
+                    </div>
+                    <div class="soil-condition">
+                        <p><strong>Soil Temperature:</strong> <span id="soil-temp">22°C</span></p>
+                    </div>
+                    <div class="soil-condition">
+                        <p><strong>Ideal for Planting:</strong> <span id="planting-status">Yes</span></p>
+                    </div>
+                    <div class="soil-condition">
+                        <p><strong>Irrigation Need:</strong> <span id="irrigation-need">Low</span></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-card">
+                <h3 class="dashboard-title">Risk Alerts</h3>
+                <div class="risk-alerts" id="risk-alerts">
+                    <div class="alert low-risk">
+                        <div class="alert-title">Pest Activity</div>
+                        <div class="alert-desc">Low risk based on current temperatures</div>
+                    </div>
+                    <div class="alert medium-risk">
+                        <div class="alert-title">Disease Pressure</div>
+                        <div class="alert-desc">Medium risk due to humidity levels</div>
+                    </div>
+                    <div class="alert no-risk">
+                        <div class="alert-title">Frost Risk</div>
+                        <div class="alert-desc">No risk in the forecast</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
